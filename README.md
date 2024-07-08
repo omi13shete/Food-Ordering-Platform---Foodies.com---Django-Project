@@ -1,0 +1,1 @@
+# Food-Ordering-Platform---Foodies.com---Django-Project
