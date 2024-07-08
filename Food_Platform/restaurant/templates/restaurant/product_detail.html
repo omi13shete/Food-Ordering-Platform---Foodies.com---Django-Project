@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!-- Product Detail Section -->
+<section class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{product.Image.url}}" class="img-fluid" alt="{{product.Name}}" style="height:500px;">
+        </div>
+        <div class="col-md-6">
+            <h1>{{product.Name}}</h1>
+            <p class="lead">{{product.Description}}</p>
+            <h4>Price: {{product.Price}}</h4>
+            <p>Availability: {{product.Availability}}</p>
+            <p>
+                <a href="{% url 'fav_dish' product.id %}" class="btn btn-danger">
+                    <i class="fas fa-heart"></i> Add to Favorites
+                </a>
+            </p>
+            <div class="d-flex">
+                {% if cart_product %}
+                <a href="{% url 'show_cart' %}"><button type="submit" class="btn btn-danger mr-2">Go to Cart</button></a>
+                {% else %}
+                <form action="/restaurant/add_to_cart">
+                    <input type="hidden" name="prod_id" value={{product.id}} id="prod_id">
+                    <button type="submit" class="btn btn-primary mr-2">Add to Cart</button>
+                </form>
+                {% endif %}
+                
+                <button class="btn btn-secondary">Go Back</button>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<br>
+
+{% endblock %}

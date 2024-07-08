@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Favorite Dishes</h2>
+    <div class="row">
+        <!-- Repeat this block for each favorite dish -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% for dish_id,dish in alldish.items  %}
+                <img src="{{dish.Image}}" class="card-img-top" alt="{{dish.Name}}">
+                <div class="card-body">
+                    <h5 class="card-title">Dish: <span>{{dish.Name}}</span></h5>
+                    <p class="card-text">This is a short description of the dish. It can be two or three sentences long.</p>
+                    <p class="card-text">Price: <span>{{dish.Price}}</span></p>
+                    <a href="{% url 'delete_fav_dish' dish_id %}" class="btn btn-danger">
+                        <i class="fas fa-heart-broken"></i> Remove from Favorites
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- End of repeat block -->
+    </div>
+</div>
+{% endblock content %}
+
+
+

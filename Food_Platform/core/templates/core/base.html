@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>{% block title %}{% endblock title %}</title>
+  <style>
+    .navbar {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .navbar-brand i {
+      color: #FF6347;
+    }
+    .navbar-nav .nav-link {
+      font-weight: bold;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #FF6347 !important;
+    }
+    .navbar-nav .nav-link.btn {
+      background-color: #FF6347;
+    }
+    .navbar-nav .nav-link.btn:hover {
+      background-color: #FF4500;
+    }
+    footer {
+      background-color: #f8f9fa;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    footer .container {
+      max-width: 1200px;
+    }
+    footer h5 {
+      color: #343a40;
+      margin-bottom: 1rem;
+    }
+    footer ul li a {
+      color: #6c757d;
+      text-decoration: none;
+    }
+    footer ul li a:hover {
+      color: #FF6347;
+    }
+    footer .text-center {
+      background-color: #343a40;
+    }
+  </style>
+</head>
+<body>
+{% if request.user.is_authenticated %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/"><i class="fa-solid fa-utensils"></i>&nbsp;Foodies</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">About</a>
+      </li>
+      {% comment %} <li class="nav-item">
+        <a class="nav-link" href="{% url 'restaurant' %}">Restaurants</a>
+      </li> {% endcomment %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'show_cart' %}">
+          <i class="fas fa-shopping-cart"></i> Cart
+          <span class="badge badge-pill badge-danger">{{total_quantity}}</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle"></i> {{request.user.first_name}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="{% url 'restaurant_profile' %}">My Profile</a>
+            <a class="dropdown-item" href="{% url 'restaurant_change_pass' %}">Change Password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'restaurant_logout' %}">Logout</a>
+        </div>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+{% else %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/"><i class="fa-solid fa-utensils"></i>&nbsp;Foodies</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'restaurant' %}">Restaurants</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn btn-danger text-white" href="{% url 'signup' %}">Sign Up</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+{% endif %}
+  
+{% block content %}{% endblock content %}
+{% block payment_gateway %}{% endblock payment_gateway %}
+
+<!-- Footer -->
+<footer class="bg-light text-center text-lg-start mt-auto">
+  <div class="container p-4">
+    <div class="row">
+      <!-- About -->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-left">
+        <h5 class="text-uppercase">About Us</h5>
+        <p>
+          FoodPlatform is the leading food ordering and delivery platform. We partner with the best restaurants around to bring your favorite dishes to your doorstep.
+        </p>
+      </div>
+      <!-- Contact -->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-left">
+        <h5 class="text-uppercase">Contact Us</h5>
+        <ul class="list-unstyled">
+          <li><a href="mailto:support@foodplatform.com" class="text-dark">Email: support@foodplatform.com</a></li>
+          <li><a href="tel:+1234567890" class="text-dark">Phone: +1 234 567 890</a></li>
+          <li><a href="#" class="text-dark">Address: 123 Main St, Anytown, USA</a></li>
+        </ul>
+      </div>
+      <!-- Bookmarks -->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-left">
+        <h5 class="text-uppercase">Bookmarks</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-dark">Home</a></li>
+          <li><a href="#" class="text-dark">Restaurants</a></li>
+          <li><a href="#" class="text-dark">Menu</a></li>
+          <li><a href="#" class="text-dark">Offers</a></li>
+          <li><a href="#" class="text-dark">Contact</a></li>
+          <li><a href="#" class="text-dark">Login</a></li>
+        </ul>
+      </div>
+      <!-- Social Media -->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-left">
+        <h5 class="text-uppercase">Follow Us</h5>
+        <ul class="list-unstyled list-inline">
+          <li class="list-inline-item"><a href="#" class="text-dark"><i class="fab fa-facebook-f"></i> Facebook</a></li><br>
+          <li class="list-inline-item"><a href="#" class="text-dark"><i class="fab fa-twitter"></i> Twitter</a></li><br>
+          <li class="list-inline-item"><a href="#" class="text-dark"><i class="fab fa-instagram"></i> Instagram</a></li><br>
+          <li class="list-inline-item"><a href="#" class="text-dark"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-3 bg-dark text-white">
+    &copy; 2024 FoodPlatform. All rights reserved.
+  </div>
+</footer>
+
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+{% endblock javascript %}
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

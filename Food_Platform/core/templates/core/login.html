@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Login Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-4">Login</h2>
+
+    <!-- Select User Type -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-4">
+            <a href="{% url 'customer_login' %}"><div class="card" id="customerCard" style="cursor: pointer;">
+                <div class="card-body text-center">
+                    <i class="fas fa-user fa-3x mb-3"></i>
+                    <h5 class="card-title">Customer</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'restaurant_login' %}">
+                <div class="card" id="restaurantCard" style="cursor: pointer;" >
+                    <div class="card-body text-center">
+                        <i class="fas fa-utensils fa-3x mb-3"></i>
+                        <h5 class="card-title">Restaurant</h5>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+
+    </div>
+
+    <!-- Centered Account Creation Link -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8 text-center">
+            <div class="account">Don't have an account? <a href="{% url 'signup' %}">Create account</a></div>
+        </div>
+    </div>
+
+    
+</section>
+
+
+{% endblock content %}

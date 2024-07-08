@@ -1,0 +1,94 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    .card-text {
+        font-size: 1rem;
+    }
+    .dropdown-menu a {
+        font-size: 0.9rem;
+    }
+    .btn-block {
+        width: 100%;
+    }
+    .alert {
+        font-size: 0.95rem;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Sidebar for Categories and Filters -->
+        <div class="col-md-3">
+            <h4 class="mb-4 text-primary">Categories</h4>
+            <div class="list-group mb-4">
+                <a href="{% url 'menu' %}" class="list-group-item list-group-item-action">All</a>
+                <div class="dropdown">
+                    <a class="list-group-item list-group-item-action dropdown-toggle" href="{% url 'menucategory' 'V' %}" role="button" id="vegDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Veg
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="vegDropdown">
+                        <a class="dropdown-item" href="{% url 'specificmenu' 'less than 399' 'V' %}">Less than 399</a>
+                        <a class="dropdown-item" href="{% url 'specificmenu' 'more than 399' 'V' %}">More than 399</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a class="list-group-item list-group-item-action dropdown-toggle" href="{% url 'menucategory' 'NV' %}" role="button" id="nonvegDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Non-Veg
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="nonvegDropdown">
+                        <a class="dropdown-item" href="{% url 'specificmenu' 'less than 399' 'NV' %}">Less than 399</a>
+                        <a class="dropdown-item" href="{% url 'specificmenu' 'more than 399' 'NV' %}">More than 399</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products List -->
+        <div class="col-md-9">
+            <h2 class="text-primary mb-4">All Food Items</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {% if message.tags == 'error' %}
+                            <i class="fas fa-exclamation-circle"></i>
+                        {% endif %}
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="row" id="productsContainer">
+                <!-- Product Card Example -->
+                {% for Dish in all_dishes %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ Dish.Image.url }}" class="card-img-top" alt="{{Dish.Name}}" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-secondary">{{ Dish.Name }}</h5>
+                            <p class="card-text">Available: <span class="text-muted">{{ Dish.Availability }}</span></p>
+                            <p class="card-text">Price: <span class="text-muted">₹{{Dish.Price}}</span></p>
+                            <p class="card-text">Discount Price: <span class="text-success">₹{{Dish.Dis_price}}</span></p>
+                            <form action="/restaurant/add_to_cart" class="mt-auto">
+                                <input type="hidden" name="prod_id" value="{{Dish.id}}" id="prod_id">
+                                <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- Repeat Product Cards as needed -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+

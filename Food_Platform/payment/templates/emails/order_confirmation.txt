@@ -1,0 +1,10 @@
+Thank you for your order, {{ user.username }}!
+
+Your order has been placed successfully.
+
+Order Details:
+{% comment %} {% for item in order_items %}
+- {{ item.quantity }} x {{ item.dish.Name }} - ${{ item.total_price }}
+{% endfor %} {% endcomment %}
+
+Total Price: ${{ total_price }}

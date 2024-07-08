@@ -1,0 +1,109 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<body>
+
+    {% load static %}
+    
+    <!-- About Us Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">About Us</h2>
+        
+        <!-- Company Overview -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h3>Company Overview</h3>
+                <p>FoodPlatform is the leading food ordering and delivery platform in India. We partner with the best restaurants around to bring your favorite dishes to your doorstep. Our mission is to make food delivery quick, easy, and enjoyable for everyone.</p>
+            </div>
+        </div>
+        
+        <!-- Mission and Vision -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3>Our Mission</h3>
+                <p>To connect people with the best local restaurants and deliver a delightful food experience every time.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Our Vision</h3>
+                <p>To be the most trusted and convenient food delivery platform in India, known for exceptional service and quality.</p>
+            </div>
+        </div>
+        
+        <!-- Founder's Message -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <img src="{% static 'images/founder.jpg' %}" class="img-fluid rounded-circle" alt="Founder - Omkar Shete">
+            </div>
+            <div class="col-md-8">
+                <h3>Founder's Message</h3>
+                <p>Hi, I'm Omkar Shete, the founder of FoodPlatform. My vision was to create a platform that makes it easy for people to enjoy their favorite meals from the comfort of their homes. We're committed to providing exceptional service and continuously improving our offerings to meet the needs of our customers.</p>
+            </div>
+        </div>
+        
+        <!-- Our Team -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h3>Our Team</h3>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{% static 'images/team1.jpg' %}" class="card-img-top img-fluid" alt="Team Member 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Team Member 1</h5>
+                        <p class="card-text">Position</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{% static 'images/team2.jpg' %}" class="card-img-top img-fluid" alt="Team Member 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Team Member 2</h5>
+                        <p class="card-text">Position</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{% static 'images/team3.jpg' %}" class="card-img-top img-fluid" alt="Team Member 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Team Member 3</h5>
+                        <p class="card-text">Position</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{% static 'images/team4.jpg' %}" class="card-img-top img-fluid" alt="Team Member 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Team Member 4</h5>
+                        <p class="card-text">Position</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Information -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h3>Contact Information</h3>
+                <p>If you have any questions or need assistance, feel free to reach out to us:</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-envelope"></i> Email: support@foodplatform.com</li>
+                    <li><i class="fas fa-phone"></i> Phone: +1 234 567 890</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Address: 123 Main St, Anytown, India</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+
+{% endblock content %}
+
+
+

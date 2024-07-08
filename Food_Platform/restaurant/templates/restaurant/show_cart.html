@@ -1,0 +1,83 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+    .card-text {
+        font-size: 1rem;
+    }
+    .cart_data_container {
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+    .btn-outline-secondary {
+        border-radius: 50%;
+        padding: 0.5rem 0.75rem;
+    }
+    .quantity {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+</style>
+    <div class="container mt-5">
+        <h1 class="mb-4 pl-4 text-primary">Your Cart</h1> 
+        <div class="row">
+            <!-- Left Section: Cart Items -->
+            <div class="col-md-8 mb-4">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <!-- Display cart items here -->
+                        {% for cart_item in cart_data %}
+                        <hr>
+                        <div class="row cart_data_container mb-3" id="cart_data">
+                            <div class="col-md-3">
+                                <img src="{{cart_item.dish.Image.url}}" alt="{{cart_item.dish.Name}}" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="card-title text-secondary">{{cart_item.dish.Name}}</h5>
+                                <p class="card-text">{{cart_item.dish.Description}}</p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="d-flex justify-content-center align-items-center mb-2">
+                                    <button class="btn btn-outline-secondary plus-cart" id="plus_cart" pid="{{cart_item.dish.id}}"><i class="fas fa-plus"></i></button>
+                                    <span class="mx-2 quantity" id="quantity">{{cart_item.quantity}}</span>
+                                    <button class="btn btn-outline-secondary minus-cart" pid="{{cart_item.dish.id}}" id="minus_cart"><i class="fas fa-minus"></i></button>
+                                </div>
+                                <p class="text-muted">Price: ₹{{cart_item.dish.Dis_price}}</p>
+                                <button class="btn btn-danger remove-cart" id="remove_button" pid="{{cart_item.dish.id}}">Remove</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- Repeat this block for each item in the cart -->
+                    </div>
+                </div>
+            </div>
+            <!-- Right Section: Order Summary -->
+            <div class="col-md-4">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Order Summary</h5>
+                        <p class="text-muted">Total Price: ₹<span id="total_price">{{total_price}}</span></p>
+                        <a href="{% url 'customer_checkout' %}" class="btn btn-primary btn-lg btn-block">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'restaurant/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'restaurant/restaurant.js' %}"></script>
+
+{% endblock javascript %}
